@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Request | Southeast Studios</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- NAVBAR (same navbar as all pages) -->
+     <nav class="main-nav">
+     <div class="nav-left">
+        <img src="faah.png" alt="Southeast Studios Logo" class="logo">
+        
+     </div>
+
+     <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="know-more.html">Know More</a></li>
+        <li><a href="about-team.html">About Team</a></li>
+        <li><a href="costumer-support.html">Customer Support</a></li>
+     </ul>
+    </nav>
+
+    <section class="page-hero">
+        <h1>Launch Your Game</h1>
+        <p>Submit your epic game idea and let's make it a reality</p>
+    </section>
+
+    <section class="page-content">
+
+        <form id="gameRequestForm" class="request-form">
+    <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" name="name" required>
+    </div>
+
+    <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" name="email" required>
+    </div>
+
+    <div class="form-group">
+        <label>Game Type</label>
+        <select name="game_type" required>
+            <option>Mobile Game</option>
+            <option>PC Game</option>
+            <option>Web Game</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Game Idea / Requirements</label>
+        <textarea name="message" rows="5" required></textarea>
+    </div>
+
+    <button type="submit" class="primary-btn">Submit Request</button>
+</form>
+
+    </section>
+
+    <!-- FOOTER (same footer) -->
+     <footer class="footer">
+    <div class="footer-container">
+        <div class="footer-brand">
+            <h3>Southeast Studios</h3>
+            <p>Student-led gaming solutions built with passion and creativity.</p>
+        </div>
+
+        <div class="footer-links">
+            <h4>Quick Links</h4>
+            <a href="index.html">Home</a>
+            <a href="know-more.html">Know More</a>
+            <a href="about-team.html">About Team</a>
+            <a href="costumer-support.html">Support</a>
+        </div>
+
+        <div class="footer-contact">
+            <h4>Contact</h4>
+            <p>Email: southeaststudios@gmail.com</p>
+            <p>Built by teens 🚀</p>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        © 2025 Southeast Studios. All rights reserved.
+    </div>
+</footer>
+
+</body>
+<!-- EmailJS library -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<script>
+  (function(){
+    emailjs.init("htsBrV00hu-BUFNU1");
+  })();
+
+  function sendEmail(e) {
+    e.preventDefault();
+
+    emailjs.sendForm(
+      "service_qhkau99",
+      "template_7o9g5wd",
+      e.target,
+      "htsBrV00hu-BUFNU1"
+    ).then(
+      () => {
+        alert("Request sent successfully!");
+      },
+      (error) => {
+        alert("Failed to send request");
+        console.log(error);
+      }
+    );
+  }
+
+  document.getElementById('gameRequestForm').addEventListener('submit', sendEmail);
+</script>
+
+  document.getElementById("gameRequestForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    alert("FORM SUBMITTED");
+
+    emailjs.sendForm(
+      "service_qhkau99",
+      "template_22xoeur",
+      this
+    ).then(
+      function() {
+        alert("Request sent successfully!");
+      },
+      function(error) {
+        alert("Error sending request");
+        console.log(error);
+      }
+    );
+  });
+</script>
+</body>
+
+</html>
