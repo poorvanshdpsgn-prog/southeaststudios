@@ -98,38 +98,30 @@
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
 <!-- Your custom code -->
-<script>
-  // Initialize EmailJS
-  (function() {
-    emailjs.init("htsBrV00hu-BUFNU1");
-  })();
 
-  // Form submission handler
+    <script>
   document.getElementById("gameRequestForm").addEventListener("submit", function(e) {
     e.preventDefault();
-
-    // Debug: log form data
-    const formData = new FormData(this);
-    console.log("Form Data:");
-    for (let pair of formData.entries()) {
-      console.log(pair[0] + ': ' + pair[1]);
-    }
+    e.stopPropagation(); // <-- Add this to stop event bubbling
+    console.log("Form submitted, sending...");
 
     emailjs.sendForm(
       "service_qhkau99",
-      "template_22xoeur",
+      "template_22xoeur",  // replace with your actual template ID
       this,
       "htsBrV00hu-BUFNU1"
     ).then(
       function(response) {
         console.log("SUCCESS!", response);
-        alert("✅ Request sent successfully!");
+        alert("✅ Request sent!");
       },
       function(error) {
-        console.log("❌ FAILED", error);
-        alert("❌ Failed: " + error.text);
+        console.log("FAILED:", error);
+        alert("❌ Error: " + error.text);
       }
     );
+
+    return false; // <-- Extra safety
   });
 </script>
 
