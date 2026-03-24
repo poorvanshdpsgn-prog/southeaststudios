@@ -91,33 +91,6 @@
 
 </body>
 <!-- EmailJS library -->
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-
-<script>
-  (function(){
-    emailjs.init("htsBrV00hu-BUFNU1");
-  })();
-
-  function sendEmail(e) {
-    e.preventDefault();
-
-    emailjs.sendForm(
-      "service_qhkau99",
-      "template_7o9g5wd",
-      e.target,
-      "htsBrV00hu-BUFNU1"
-    ).then(
-      () => {
-        alert("Request sent successfully!");
-      },
-      (error) => {
-        alert("Failed to send request");
-        console.log(error);
-      }
-    );
-  }
-
-  document.getElementById('gameRequestForm').addEventListener('submit', sendEmail);
 <script>
   document.getElementById("gameRequestForm").addEventListener("submit", function(e) {
     e.preventDefault();
