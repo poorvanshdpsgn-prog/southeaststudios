@@ -117,23 +117,30 @@
   }
 
   document.getElementById('gameRequestForm').addEventListener('submit', sendEmail);
-</script>
-
+<script>
   document.getElementById("gameRequestForm").addEventListener("submit", function(e) {
     e.preventDefault();
-    alert("FORM SUBMITTED");
+
+    // Debug: log form data
+    const formData = new FormData(this);
+    console.log("Form Data:");
+    for (let pair of formData.entries()) {
+      console.log(pair[0] + ': ' + pair[1]);
+    }
 
     emailjs.sendForm(
       "service_qhkau99",
-      "template_22xoeur",
-      this
+      "template_7o9g5wd",
+      this,
+      "htsBrV00hu-BUFNU1"
     ).then(
-      function() {
-        alert("Request sent successfully!");
+      function(response) {
+        console.log("SUCCESS!", response);
+        alert("✅ Request sent successfully!");
       },
       function(error) {
-        alert("Error sending request");
-        console.log(error);
+        console.log("❌ FAILED", error);
+        alert("❌ Failed: " + error.text);
       }
     );
   });
