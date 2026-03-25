@@ -748,3 +748,63 @@ body::before {
     font-size: 14px;
   }
 }
+
+/* ========== HAMBURGER MENU ========== */
+
+/* Hide hamburger by default (desktop) */
+.hamburger {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: var(--accent-primary);
+  transition: var(--transition);
+}
+
+.hamburger:hover {
+  text-shadow: var(--glow-primary);
+}
+
+/* Tablet and Mobile styles */
+@media (max-width: 1024px) {
+  .main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+  }
+  
+  .hamburger {
+    display: block;
+  }
+  
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    gap: 15px;
+    padding: 20px 0;
+  }
+  
+  .nav-links.active {
+    display: flex;
+  }
+  
+  .nav-links li a {
+    padding: 10px 20px;
+    display: block;
+  }
+}
+
+/* Desktop (above 1024px) */
+@media (min-width: 1025px) {
+  .nav-links {
+    display: flex !important;
+    flex-direction: row;
+    position: static;
+  }
+  
+  .hamburger {
+    display: none !important;
+  }
+}
