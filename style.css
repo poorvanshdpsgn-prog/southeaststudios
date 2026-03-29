@@ -843,3 +843,57 @@ body::before {
   position: relative;
   z-index: 1;
 }
+/* SLIDER WRAPPER */
+.team-slider-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+/* SLIDER */
+.team-slider {
+  display: flex;
+  gap: 30px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 20px;
+}
+
+/* Hide scrollbar */
+.team-slider::-webkit-scrollbar {
+  display: none;
+}
+
+/* Each card size control */
+.team-card {
+  min-width: 280px;
+  flex: 0 0 auto;
+}
+
+/* ARROWS */
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: 2px solid var(--accent-primary);
+  color: var(--accent-primary);
+  font-size: 28px;
+  padding: 10px 15px;
+  cursor: pointer;
+  z-index: 10;
+  transition: var(--transition);
+}
+
+.slider-btn:hover {
+  background: var(--accent-primary);
+  color: var(--bg-primary);
+  box-shadow: var(--glow-primary);
+}
+
+.slider-btn.left {
+  left: 10px;
+}
+
+.slider-btn.right {
+  right: 10px;
+}
