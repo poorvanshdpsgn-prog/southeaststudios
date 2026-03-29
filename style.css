@@ -20,6 +20,28 @@
 * {
   box-sizing: border-box;
 }
+/* DISABLED BUTTON */
+.primary-btn.disabled {
+  border-color: var(--text-secondary);
+  color: var(--text-secondary);
+  cursor: not-allowed;
+  opacity: 0.6;
+  box-shadow: none;
+}
+
+/* remove hover effects */
+.primary-btn.disabled:hover {
+  background: transparent;
+  color: var(--text-secondary);
+  transform: none;
+  box-shadow: none;
+  text-shadow: none;
+}
+
+/* stop animation */
+.primary-btn.disabled::before {
+  display: none;
+}
 
 body {
   margin: 0;
