@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Smart Bag Controller - Southeast Studios</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="main-nav">
+  <div class="nav-left">
+    <img src="faah.png" alt="Southeast Studios Logo" class="logo">
+  </div>
+
+  <div class="hamburger" id="hamburger">☰</div>
+
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="know-more.html">Know More</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="about-team.html">About Team</a></li>
+    <li><a href="costumer-support.html">Customer Support</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <h1>Smart Bag Controller</h1>
+  <p>A smart anti-theft and monitoring system for everyday backpacks</p>
+</section>
+
+<!-- OVERVIEW -->
+<section class="page-content">
+  <div class="content-block">
+    <h2>Overview</h2>
+    <p>
+      The Smart Bag Controller is an intelligent system designed to enhance the safety
+      and usability of backpacks. It uses sensors and smart logic to detect unauthorized
+      access and notify the user instantly.
+    </p>
+  </div>
+
+  <!-- FEATURES -->
+  <div class="content-block">
+    <h2>Key Features</h2>
+    <ul>
+      <li>Zip detection using distance sensor</li>
+      <li>Instant alert system for unauthorized access</li>
+      <li>Real-time monitoring</li>
+      <li>Compact and efficient design</li>
+    </ul>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="content-block">
+    <h2>How It Works</h2>
+    <p>
+      The system continuously monitors the position of the bag’s zip using a sensor.
+      If the zip is opened beyond a defined threshold, the system triggers an alert.
+      This ensures immediate awareness of potential theft or tampering.
+    </p>
+  </div>
+
+  <!-- TECH -->
+  <div class="content-block">
+    <h2>Technologies Used</h2>
+    <ul>
+      <li>Arduino (Microcontroller)</li>
+      <li>Ultrasonic Sensor</li>
+      <li>Embedded C / Arduino IDE</li>
+    </ul>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <h2>Interested in building something similar?</h2>
+  <a href="projects.html" class="primary-btn">Explore More Projects</a>
+</section>
+
+</body>
+  <script>
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+</script>
+</html>
