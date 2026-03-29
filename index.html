@@ -63,19 +63,21 @@
         <img src="download.jpeg" alt="Gaming Image" class="hero-image">
     </div>
 </section>
+    <div class="team-slider-wrapper">
+<section>
+  <button class="slider-btn left" onclick="scrollTeam(-1)">❮</button>
 
-      <section class="team">
-    <h2 class="team-title">Meet the Team</h2>
-    <p class="team-subtitle">Young minds building creative gaming solutions</p>
-
-    <div class="team-grid">
-        <div class="team-card">
-            <img src="IMG20251020212348.jpg" alt="Founder">
-            <h3>Poorvansh</h3>
-            <span>Founder & Developer</span>
-        </div>
-
-        <div class="team-card">
+  <div class="team-slider" id="teamSlider">
+    
+    <!-- keep ALL your team-card divs inside here -->
+    
+    <!-- example -->
+    <div class="team-card">
+      <img src="IMG20251020212348.jpg">
+      <h3>Poorvansh</h3>
+      <span>Founder & Developer</span>
+    </div>
+      <div class="team-card">
             <img src="WhatsApp Image 2026-02-14 at 12.47.53 PM.jpeg" alt="Co-Founder">
             <h3>Pratyush Yaduvanshi</h3>
             <span>Co-Founder and Developer</span>
@@ -121,8 +123,15 @@
             <span>Developer</span>
         </div>
         
-    </div>
+
+    <!-- rest same -->
+
+  </div>
+
+  <button class="slider-btn right" onclick="scrollTeam(1)">❯</button>
 </section>
+
+</div>
 
 
 
@@ -163,5 +172,25 @@
   hamburger.addEventListener('click', () => {
     navLinks.classList.toggle('active');
   });
+
+<script>
+function scrollTeam(direction) {
+  const slider = document.getElementById('teamSlider');
+  const scrollAmount = 320; // card width + gap
+  slider.scrollBy({
+    left: direction * scrollAmount,
+    behavior: 'smooth'
+  });
+}
+
+// Auto scroll
+setInterval(() => {
+  const slider = document.getElementById('teamSlider');
+  slider.scrollBy({
+    left: 320,
+    behavior: 'smooth'
+  });
+}, 3000);
+</script>
 </script>
 </html>
