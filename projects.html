@@ -34,40 +34,48 @@
     <!-- PROJECT 1 -->
     <div class="project-card">
       <div class="project-content">
-        <h2>Your App Name</h2>
+        <h2>Smart Bag Controller</h2>
         <span class="tag">Mobile App • Completed</span>
         <p>
           A custom-built application designed to deliver a smooth and engaging user experience.
         </p>
-        <a href="#" class="primary-btn">View Project</a>
+        <a href="project-smartbag.html" class="primary-btn">View Project</a>
       </div>
     </div>
 
     <!-- PROJECT 2 -->
     <div class="project-card">
       <div class="project-content">
-        <h2>Team App</h2>
+        <h2>Lego Simulator</h2>
         <span class="tag progress">Mobile App • In Progress</span>
         <p>
-          A collaborative app project focused on innovation and performance, currently under development.
+          A collaborative app project focused on innovation with the help of Legos, currently under development.
         </p>
-        <a href="#" class="primary-btn">Coming Soon</a>
+        <a href="#" class="primary-btn disabled">Coming Soon</a>
       </div>
     </div>
 
     <!-- PROJECT 3 -->
     <div class="project-card">
       <div class="project-content">
-        <h2>Studio Website</h2>
+        <h2>AI Study Helper</h2>
         <span class="tag progress">Website • In Progress</span>
         <p>
-          A modern, responsive website designed with performance and aesthetics in mind.
+          A modern, responsive website designed with performance and aesthetics in mind, to help students study more efficiently.
         </p>
-        <a href="#" class="primary-btn">Coming Soon</a>
+        <a href="#" class="primary-btn disabled">Coming Soon</a>
       </div>
     </div>
 
   </section>
 
 </body>
+  <script>
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+</script>
 </html>
