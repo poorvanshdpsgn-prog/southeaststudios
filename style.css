@@ -16,7 +16,19 @@
   --border-radius: 16px;
   --transition: all 0.3s ease;
 }
+.nav-btn {
+    background: #00ffff;
+    color: #0a0a0a !important;
+    border-radius: 8px;
+    padding: 8px 20px !important;
+    transition: all 0.3s ease;
+}
 
+.nav-btn:hover {
+    background: #ff00ff;
+    color: #fff !important;
+    box-shadow: 0 0 15px #ff00ff;
+}
 * {
   box-sizing: border-box;
 }
