@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | BotForge</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Extra styles for login page */
+        .auth-container {
+            min-height: 80vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+        .auth-card {
+            background: rgba(10, 10, 20, 0.95);
+            backdrop-filter: blur(10px);
+            border: 2px solid #00ffff;
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+        }
+        .auth-card h2 {
+            color: #00ffff;
+            font-family: 'Orbitron', sans-serif;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .auth-card input {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 20px;
+            background: #0a0a14;
+            border: 1px solid #00ffff;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+        }
+        .auth-card input:focus {
+            outline: none;
+            border-color: #ff00ff;
+            box-shadow: 0 0 10px #ff00ff;
+        }
+        .auth-card button {
+            width: 100%;
+            padding: 14px;
+            background: #00ffff;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .auth-card button:hover {
+            background: #ff00ff;
+            box-shadow: 0 0 15px #ff00ff;
+        }
+        .auth-footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #aaa;
+        }
+        .auth-footer a {
+            color: #00ffff;
+            text-decoration: none;
+        }
+        .auth-footer a:hover {
+            color: #ff00ff;
+        }
+        .error-message {
+            color: #ff4444;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-left">
+            <img src="faah.png" alt="BotForge Logo" class="logo">
+        </div>
+        <div class="hamburger" id="hamburger">☰</div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="know-more.html">Know More</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="about-team.html">About Team</a></li>
+            <li><a href="costumer-support.html">Support</a></li>
+        </ul>
+    </nav>
+
+    <div class="auth-container">
+        <div class="auth-card">
+            <h2 id="formTitle">Login</h2>
+            <div id="errorMsg" class="error-message"></div>
+            <input type="email" id="email" placeholder="Email address" autocomplete="email">
+            <input type="password" id="password" placeholder="Password" autocomplete="current-password">
+            <button id="submitBtn">Login</button>
+            <div class="auth-footer">
+                <span id="toggleText">Don't have an account? </span>
+                <a href="#" id="toggleLink">Sign up</a>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3>BotForge</h3>
+                <p>Build custom chatbots. No code required.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="know-more.html">Know More</a>
+                <a href="projects.html">Projects</a>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact</h4>
+                <p>Email: southeaststudios@gmail.com</p>
+                <p><i>Built by teens, for the teens 🚀</i></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2025 Southeast Studios. All rights reserved.
+        </div>
+    </footer>
+
+    <script type="module">
+        // Hamburger menu
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        if (hamburger) {
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+        }
+
+        // Firebase imports
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAHLyiX6AvIjEr-hkaBGKg_kEf78Xskd48",
+            authDomain: "southeast-studios.firebaseapp.com",
+            projectId: "southeast-studios",
+            storageBucket: "southeast-studios.firebasestorage.app",
+            messagingSenderId: "977801049293",
+            appId: "1:977801049293:web:911d9d0986a025d113e584",
+            measurementId: "G-6NWDYJ4DJ0"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        let isLogin = true;
+
+        const formTitle = document.getElementById('formTitle');
+        const submitBtn = document.getElementById('submitBtn');
+        const toggleLink = document.getElementById('toggleLink');
+        const toggleText = document.getElementById('toggleText');
+        const errorMsg = document.getElementById('errorMsg');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+
+        function setFormMode(loginMode) {
+            isLogin = loginMode;
+            if (isLogin) {
+                formTitle.innerText = 'Login';
+                submitBtn.innerText = 'Login';
+                toggleText.innerText = "Don't have an account? ";
+                toggleLink.innerText = 'Sign up';
+            } else {
+                formTitle.innerText = 'Sign Up';
+                submitBtn.innerText = 'Sign Up';
+                toggleText.innerText = "Already have an account? ";
+                toggleLink.innerText = 'Login';
+            }
+            errorMsg.innerText = '';
+        }
+
+        toggleLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            setFormMode(!isLogin);
+        });
+
+        submitBtn.addEventListener('click', async () => {
+            const email = emailInput.value.trim();
+            const password = passwordInput.value.trim();
+
+            if (!email || !password) {
+                errorMsg.innerText = 'Please enter both email and password.';
+                return;
+            }
+
+            errorMsg.innerText = '';
+
+            try {
+                if (isLogin) {
+                    await signInWithEmailAndPassword(auth, email, password);
+                    alert('Logged in successfully!');
+                    window.location.href = 'dashboard.html';
+                } else {
+                    await createUserWithEmailAndPassword(auth, email, password);
+                    alert('Account created! You can now log in.');
+                    setFormMode(true);
+                    emailInput.value = '';
+                    passwordInput.value = '';
+                }
+            } catch (error) {
+                errorMsg.innerText = error.message;
+            }
+        });
+    </script>
+</body>
+</html>
