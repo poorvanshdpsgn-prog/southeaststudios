@@ -228,6 +228,32 @@
     e.preventDefault();
     signup();
   };
+        import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+onAuthStateChanged(auth, (user) => {
+  const loginBtn = document.getElementById("loginBtn");
+  const signupBtn = document.getElementById("signupBtn");
+  if (user) {
+    // Logged in: show user email + logout
+    loginBtn.innerHTML = user.email;
+    loginBtn.href = "#";
+    loginBtn.onclick = (e) => {
+      e.preventDefault();
+      signOut(auth);
+      location.reload();
+    };
+    signupBtn.innerHTML = "Logout";
+    signupBtn.onclick = (e) {
+      e.preventDefault();
+      signOut(auth);
+      location.reload();
+    };
+  } else {
+    // Logged out: show Login / Signup
+    loginBtn.innerHTML = "Login";
+    signupBtn.innerHTML = "Sign Up";
+  }
+});
     </script>
 </body>
 </html>
