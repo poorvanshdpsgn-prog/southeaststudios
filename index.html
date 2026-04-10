@@ -178,6 +178,56 @@
             slider.addEventListener('mouseenter', () => clearInterval(autoScrollInterval));
             slider.addEventListener('mouseleave', startAutoScroll);
         }
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+  const firebaseConfig = {
+  apiKey: "AIzaSyAHLyiX6AvIjEr-hkaBGKg_kEf78Xskd48",
+  authDomain: "southeast-studios.firebaseapp.com",
+  projectId: "southeast-studios",
+  storageBucket: "southeast-studios.firebasestorage.app",
+  messagingSenderId: "977801049293",
+  appId: "1:977801049293:web:911d9d0986a025d113e584",
+  measurementId: "G-6NWDYJ4DJ0"
+};
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  // Login function
+  window.login = async () => {
+    const email = prompt("Enter your email:");
+    const password = prompt("Enter your password:");
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      alert("Logged in successfully!");
+      location.reload();
+    } catch (error) {
+      alert("Login failed: " + error.message);
+    }
+  };
+
+  // Signup function
+  window.signup = async () => {
+    const email = prompt("Enter your email:");
+    const password = prompt("Enter your password:");
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      alert("Account created! You can now log in.");
+    } catch (error) {
+      alert("Signup failed: " + error.message);
+    }
+  };
+
+  // Attach to buttons
+  document.getElementById("loginBtn").onclick = (e) => {
+    e.preventDefault();
+    login();
+  };
+  document.getElementById("signupBtn").onclick = (e) => {
+    e.preventDefault();
+    signup();
+  };
     </script>
 </body>
 </html>
