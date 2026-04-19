@@ -100,7 +100,11 @@ body::before {
   z-index: 1000;
   font-family: 'Orbitron', sans-serif;
 }
-
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 .nav-left {
   display: flex;
   align-items: center;
