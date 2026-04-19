@@ -256,23 +256,13 @@ onAuthStateChanged(auth, (user) => {
     loginBtn.onclick = null;
 
   } else {
-    // Logged out
-    loginBtn.innerHTML = "Login / Sign Up";
-    loginBtn.href = "#";
-
-    loginBtn.onclick = (e) => {
-      e.preventDefault();
-
-      const choice = confirm("Press OK to Login, Cancel to Sign Up");
-
-      if (choice) {
-        window.login();
-      } else {
-        window.signup();
-      }
-    };
-  }
-});
+  // Logged out
+  loginBtn.innerHTML = "Login / Sign Up";
+  loginBtn.href = "login.html";
+  loginBtn.onclick = null;
+}
+  
+);
 
 // ========== CHATBOT ==========
 const circle = document.getElementById("chatbot-circle");
