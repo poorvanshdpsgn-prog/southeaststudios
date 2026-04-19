@@ -147,131 +147,138 @@
     </footer>
 
     <script type="module">
-    // ========== HAMBURGER MENU ==========
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('navLinks');
-    if (hamburger) {
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-    }
 
-    // ========== TEAM SLIDER FUNCTIONS ==========
-    function scrollTeam(direction) {
-        const slider = document.getElementById('teamSlider');
-        if (slider) {
-            const scrollAmount = 320;
-            slider.scrollBy({
-                left: direction * scrollAmount,
-                behavior: 'smooth'
-            });
-        }
-    }
-    window.scrollTeam = scrollTeam;
+// ========== HAMBURGER MENU ==========
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
 
-    let autoScrollInterval;
-    function startAutoScroll() {
-        autoScrollInterval = setInterval(() => {
-            const slider = document.getElementById('teamSlider');
-            if (slider && !slider.matches(':hover')) {
-                slider.scrollBy({
-                    left: 320,
-                    behavior: 'smooth'
-                });
-            }
-        }, 4000);
-    }
-    
-    startAutoScroll();
-    
-    const slider = document.getElementById('teamSlider');
-    if (slider) {
-        slider.addEventListener('mouseenter', () => clearInterval(autoScrollInterval));
-        slider.addEventListener('mouseleave', startAutoScroll);
-    }
+if (hamburger) {
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+}
 
-    // ========== FIREBASE IMPORTS ==========
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-
-    // ========== FIREBASE CONFIG ==========
-    const firebaseConfig = {
-        apiKey: "AIzaSyAHLyiX6AvIjEr-hkaBGKg_kEf78Xskd48",
-        authDomain: "southeast-studios.firebaseapp.com",
-        projectId: "southeast-studios",
-        storageBucket: "southeast-studios.firebasestorage.app",
-        messagingSenderId: "977801049293",
-        appId: "1:977801049293:web:911d9d0986a025d113e584",
-        measurementId: "G-6NWDYJ4DJ0"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-
-    // ========== AUTH FUNCTIONS ==========
-    window.login = async () => {
-        const email = prompt("Enter your email:");
-        const password = prompt("Enter your password:");
-        if (!email || !password) return;
-        try {
-            await signInWithEmailAndPassword(auth, email, password);
-            alert("Logged in successfully!");
-            location.reload();
-        } catch (error) {
-            alert("Login failed: " + error.message);
-        }
-    };
-
-    window.signup = async () => {
-        const email = prompt("Enter your email:");
-        const password = prompt("Enter your password:");
-        if (!email || !password) return;
-        try {
-            await createUserWithEmailAndPassword(auth, email, password);
-            alert("Account created! You can now log in.");
-        } catch (error) {
-            alert("Signup failed: " + error.message);
-        }
-    };
-
-    window.logout = async () => {
-        await signOut(auth);
-        alert("Logged out");
-        location.reload();
-    };
-
-    // ========== ATTACH BUTTON EVENTS ==========
-    const loginBtn = document.getElementById("loginBtn");
-    const signupBtn = document.getElementById("signupBtn");
-
-    // Update UI based on auth state
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-            // Logged in
-            loginBtn.innerHTML = user.email;
-            loginBtn.href = "#";
-            loginBtn.onclick = (e) => {
-                e.preventDefault();
-                window.logout();
-            };
-            signupBtn.innerHTML = "Dashboard";
-            signupBtn.href = "/dashboard.html";
-            signupBtn.onclick = null;
-        } else {
-            // Logged out
-            loginBtn.innerHTML = "Login";
-            loginBtn.onclick = (e) => {
-                e.preventDefault();
-                window.login();
-            };
-            signupBtn.innerHTML = "Sign Up";
-            signupBtn.onclick = (e) => {
-                e.preventDefault();
-                window.signup();
-            };
-        }
+// ========== TEAM SLIDER ==========
+function scrollTeam(direction) {
+  const slider = document.getElementById('teamSlider');
+  if (slider) {
+    slider.scrollBy({
+      left: direction * 320,
+      behavior: 'smooth'
     });
-        const circle = document.getElementById("chatbot-circle");
+  }
+}
+window.scrollTeam = scrollTeam;
+
+let autoScrollInterval;
+
+function startAutoScroll() {
+  autoScrollInterval = setInterval(() => {
+    const slider = document.getElementById('teamSlider');
+    if (slider && !slider.matches(':hover')) {
+      slider.scrollBy({
+        left: 320,
+        behavior: 'smooth'
+      });
+    }
+  }, 4000);
+}
+
+startAutoScroll();
+
+const slider = document.getElementById('teamSlider');
+if (slider) {
+  slider.addEventListener('mouseenter', () => clearInterval(autoScrollInterval));
+  slider.addEventListener('mouseleave', startAutoScroll);
+}
+
+// ========== FIREBASE ==========
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAHLyiX6AvIjEr-hkaBGKg_kEf78Xskd48",
+  authDomain: "southeast-studios.firebaseapp.com",
+  projectId: "southeast-studios",
+  storageBucket: "southeast-studios.firebasestorage.app",
+  messagingSenderId: "977801049293",
+  appId: "1:977801049293:web:911d9d0986a025d113e584",
+  measurementId: "G-6NWDYJ4DJ0"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// ========== AUTH FUNCTIONS ==========
+window.login = async () => {
+  const email = prompt("Enter your email:");
+  const password = prompt("Enter your password:");
+  if (!email || !password) return;
+
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    alert("Logged in successfully!");
+    location.reload();
+  } catch (error) {
+    alert("Login failed: " + error.message);
+  }
+};
+
+window.signup = async () => {
+  const email = prompt("Enter your email:");
+  const password = prompt("Enter your password:");
+  if (!email || !password) return;
+
+  try {
+    await createUserWithEmailAndPassword(auth, email, password);
+    alert("Account created! You can now log in.");
+  } catch (error) {
+    alert("Signup failed: " + error.message);
+  }
+};
+
+window.logout = async () => {
+  await signOut(auth);
+  alert("Logged out");
+  location.reload();
+};
+
+// ========== LOGIN BUTTON ==========
+const loginBtn = document.getElementById("loginBtn");
+
+// Update UI based on auth state
+onAuthStateChanged(auth, (user) => {
+
+  if (user) {
+    // Logged in
+    loginBtn.innerHTML = user.email;
+    loginBtn.href = "#";
+    loginBtn.onclick = (e) => {
+      e.preventDefault();
+      window.logout();
+    };
+
+  } else {
+    // Logged out
+    loginBtn.innerHTML = "Login / Sign Up";
+    loginBtn.href = "#";
+
+    loginBtn.onclick = (e) => {
+      e.preventDefault();
+
+      const choice = confirm("Press OK to Login, Cancel to Sign Up");
+
+      if (choice) {
+        window.login();
+      } else {
+        window.signup();
+      }
+    };
+  }
+});
+
+// ========== CHATBOT ==========
+const circle = document.getElementById("chatbot-circle");
 const box = document.getElementById("chatbot-box");
 const closeBtn = document.getElementById("close-chat");
 const messages = document.getElementById("chatbot-messages");
@@ -346,6 +353,7 @@ function handleOption(value) {
     { text: "⬅ Back", value: "menu" }
   ]);
 }
+
 </script>
 </body>
 </html>
