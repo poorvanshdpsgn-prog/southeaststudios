@@ -216,6 +216,10 @@
                 errorMsg.innerText = error.message;
             }
         });
+        await signInWithEmailAndPassword(auth, email, password);
+
+// redirect
+window.location.href = "dashboard.html";
     </script>
 </body>
 </html>
