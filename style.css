@@ -1021,3 +1021,100 @@ body::before {
   border: 2px solid var(--accent-primary);
   box-shadow: 0 0 30px rgba(0,255,255,0.3);
 }
+/* ================= FINAL RESPONSIVE FIX ================= */
+
+/* TABLET FIX (your 775px issue) */
+@media (max-width: 780px) {
+
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 60px 6%;
+    gap: 25px;
+  }
+
+  .hero-left {
+    max-width: 100%;
+  }
+
+  .hero-left h1 {
+    font-size: 2.4rem;
+    letter-spacing: 2px;
+  }
+
+  .hero-left p {
+    font-size: 1rem;
+  }
+
+  .hero-right {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .hero-image {
+    max-width: 220px;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+}
+
+/* MOBILE FIX */
+@media (max-width: 480px) {
+
+  .hero {
+    padding: 50px 5%;
+  }
+
+  .hero-left h1 {
+    font-size: 1.9rem;
+  }
+
+  .hero-left p {
+    font-size: 0.9rem;
+  }
+
+  .hero-image {
+    max-width: 180px;
+  }
+
+}
+
+/* ================= NAVBAR CLEANUP ================= */
+
+/* Prevent login/nav overlap */
+.nav-links {
+  align-items: center;
+}
+
+/* Better spacing on tablet */
+@media (max-width: 1024px) {
+  .main-nav {
+    padding: 12px 20px;
+  }
+}
+
+/* ================= IMAGE FIX ================= */
+
+/* Prevent weird floating on large screens */
+.hero-image {
+  display: block;
+  margin: auto;
+}
+
+/* ================= EXTRA POLISH ================= */
+
+/* Prevent horizontal scroll issues */
+body {
+  overflow-x: hidden;
+}
+
+/* Fix random overflow elements */
+.hero,
+.cards,
+.team,
+.projects-section {
+  max-width: 100%;
+  overflow-x: hidden;
+}
