@@ -108,6 +108,19 @@
             <button class="slider-btn right" onclick="scrollTeam(1)">❯</button>
         </div>
     </section>
+    <div id="chatbot-circle">💬</div>
+
+<div id="chatbot-box">
+  <div id="chatbot-header">
+    <div>
+      Southeast Bot
+      <small>Online • instant replies</small>
+    </div>
+    <span id="close-chat" style="cursor:pointer;">✖</span>
+  </div>
+
+  <div id="chatbot-messages"></div>
+</div>
 
     <footer class="footer">
         <div class="footer-container">
@@ -258,6 +271,81 @@
             };
         }
     });
+        const circle = document.getElementById("chatbot-circle");
+const box = document.getElementById("chatbot-box");
+const closeBtn = document.getElementById("close-chat");
+const messages = document.getElementById("chatbot-messages");
+
+circle.onclick = () => {
+  box.style.display = "flex";
+  circle.style.display = "none";
+  messages.innerHTML = "";
+  startChat();
+};
+
+closeBtn.onclick = () => {
+  box.style.display = "none";
+  circle.style.display = "flex";
+};
+
+function addMessage(text, sender="bot") {
+  const msg = document.createElement("div");
+  msg.classList.add("message", sender);
+  msg.innerText = text;
+  messages.appendChild(msg);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+function addOptions(options) {
+  const container = document.createElement("div");
+  container.classList.add("options");
+
+  options.forEach(opt => {
+    const btn = document.createElement("button");
+    btn.classList.add("option-btn");
+    btn.innerText = opt.text;
+    btn.onclick = () => handleOption(opt.value);
+    container.appendChild(btn);
+  });
+
+  messages.appendChild(container);
+}
+
+function startChat() {
+  addMessage("Hey! 👋 Welcome to Southeast Studios.");
+  addMessage("How can I help you today?");
+  
+  addOptions([
+    { text: "🚀 Projects", value: "projects" },
+    { text: "🎒 Smart Bag", value: "smartbag" },
+    { text: "📩 Contact", value: "contact" }
+  ]);
+}
+
+function handleOption(value) {
+  addMessage(value, "user");
+
+  if (value === "projects") {
+    addMessage("We build innovative projects like Smart Bag and AI systems.");
+  }
+
+  else if (value === "smartbag") {
+    addMessage("Our Smart Bag includes ultrasonic sensing, moisture detection, RTC, Bluetooth & LCD.");
+  }
+
+  else if (value === "contact") {
+    addMessage("You can contact us through the website contact section.");
+  }
+
+  else if (value === "menu") {
+    startChat();
+    return;
+  }
+
+  addOptions([
+    { text: "⬅ Back", value: "menu" }
+  ]);
+}
 </script>
 </body>
 </html>
