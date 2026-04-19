@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+</head>
+  <style>
+    body {
+  background: black;
+  color: cyan;
+  font-family: 'Orbitron';
+  text-align: center;
+  padding-top: 100px;
+}
+
+button {
+  background: cyan;
+  color: black;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+  </style>
+<body>
+
+<h1>Welcome 👋</h1>
+<p id="userEmail">Loading...</p>
+
+<button onclick="logout()">Logout</button>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "YOUR_KEY",
+  authDomain: "YOUR_DOMAIN",
+  projectId: "YOUR_ID",
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// check user
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    document.getElementById("userEmail").innerText = user.email;
+  } else {
+    // not logged in → go back
+    window.location.href = "login.html";
+  }
+});
+
+// logout
+window.logout = async () => {
+  await signOut(auth);
+  window.location.href = "index.html";
+};
+</script>
+
+</body>
+</html>
