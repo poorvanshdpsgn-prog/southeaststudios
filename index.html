@@ -251,12 +251,9 @@ onAuthStateChanged(auth, (user) => {
 
   if (user) {
     // Logged in
-    loginBtn.innerHTML = user.email;
-    loginBtn.href = "#";
-    loginBtn.onclick = (e) => {
-      e.preventDefault();
-      window.logout();
-    };
+    loginBtn.innerHTML = "Login / Sign Up";
+    loginBtn.href = "login.html";
+    loginBtn.onclick = null;
 
   } else {
     // Logged out
