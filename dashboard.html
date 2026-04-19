@@ -37,29 +37,28 @@ const firebaseConfig = {
   projectId: "southeast-studios",
   storageBucket: "southeast-studios.firebasestorage.app",
   messagingSenderId: "977801049293",
-  appId: "1:977801049293:web:911d9d0986a025d113e584",
-  measurementId: "G-6NWDYJ4DJ0"
+  appId: "1:977801049293:web:911d9d0986a025d113e584"
 };
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// check user
+const userEmail = document.getElementById("userEmail");
+
+// WAIT for Firebase
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    document.getElementById("userEmail").innerText = user.email;
+    userEmail.innerText = user.email;
   } else {
-    // not logged in → go back
+    console.log("No user found");
     window.location.href = "login.html";
   }
 });
 
-// logout
 window.logout = async () => {
   await signOut(auth);
   window.location.href = "index.html";
 };
 </script>
-
 </body>
 </html>
