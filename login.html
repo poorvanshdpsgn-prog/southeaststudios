@@ -131,95 +131,110 @@
         </div>
     </footer>
 
-    <script type="module">
-        // Hamburger menu
-        const hamburger = document.getElementById('hamburger');
-        const navLinks = document.getElementById('navLinks');
-        if (hamburger) {
-            hamburger.addEventListener('click', () => {
-                navLinks.classList.toggle('active');
-            });
-        }
+   <script type="module">
+/* ========== HAMBURGER MENU ========== */
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
 
-        // Firebase imports
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+if (hamburger) {
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+}
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyAHLyiX6AvIjEr-hkaBGKg_kEf78Xskd48",
-            authDomain: "southeast-studios.firebaseapp.com",
-            projectId: "southeast-studios",
-            storageBucket: "southeast-studios.firebasestorage.app",
-            messagingSenderId: "977801049293",
-            appId: "1:977801049293:web:911d9d0986a025d113e584",
-            measurementId: "G-6NWDYJ4DJ0"
-        };
+/* ========== FIREBASE IMPORTS ========== */
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+import { 
+  getAuth, 
+  createUserWithEmailAndPassword, 
+  signInWithEmailAndPassword 
+} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
+/* ========== FIREBASE CONFIG ========== */
+const firebaseConfig = {
+  apiKey: "AIzaSyAHLyiX6AvIjEr-hkaBGKg_kEf78Xskd48",
+  authDomain: "southeast-studios.firebaseapp.com",
+  projectId: "southeast-studios",
+  storageBucket: "southeast-studios.firebasestorage.app",
+  messagingSenderId: "977801049293",
+  appId: "1:977801049293:web:911d9d0986a025d113e584",
+  measurementId: "G-6NWDYJ4DJ0"
+};
 
-        let isLogin = true;
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
-        const formTitle = document.getElementById('formTitle');
-        const submitBtn = document.getElementById('submitBtn');
-        const toggleLink = document.getElementById('toggleLink');
-        const toggleText = document.getElementById('toggleText');
-        const errorMsg = document.getElementById('errorMsg');
-        const emailInput = document.getElementById('email');
-        const passwordInput = document.getElementById('password');
+/* ========== UI ELEMENTS ========== */
+let isLogin = true;
 
-        function setFormMode(loginMode) {
-            isLogin = loginMode;
-            if (isLogin) {
-                formTitle.innerText = 'Login';
-                submitBtn.innerText = 'Login';
-                toggleText.innerText = "Don't have an account? ";
-                toggleLink.innerText = 'Sign up';
-            } else {
-                formTitle.innerText = 'Sign Up';
-                submitBtn.innerText = 'Sign Up';
-                toggleText.innerText = "Already have an account? ";
-                toggleLink.innerText = 'Login';
-            }
-            errorMsg.innerText = '';
-        }
+const formTitle = document.getElementById('formTitle');
+const submitBtn = document.getElementById('submitBtn');
+const toggleLink = document.getElementById('toggleLink');
+const toggleText = document.getElementById('toggleText');
+const errorMsg = document.getElementById('errorMsg');
+const emailInput = document.getElementById('email');
+const passwordInput = document.getElementById('password');
 
-        toggleLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            setFormMode(!isLogin);
-        });
+/* ========== FORM SWITCH (LOGIN / SIGNUP) ========== */
+function setFormMode(loginMode) {
+  isLogin = loginMode;
 
-        submitBtn.addEventListener('click', async () => {
-            const email = emailInput.value.trim();
-            const password = passwordInput.value.trim();
+  if (isLogin) {
+    formTitle.innerText = 'Login';
+    submitBtn.innerText = 'Login';
+    toggleText.innerText = "Don't have an account? ";
+    toggleLink.innerText = 'Sign up';
+  } else {
+    formTitle.innerText = 'Sign Up';
+    submitBtn.innerText = 'Sign Up';
+    toggleText.innerText = "Already have an account? ";
+    toggleLink.innerText = 'Login';
+  }
 
-            if (!email || !password) {
-                errorMsg.innerText = 'Please enter both email and password.';
-                return;
-            }
+  errorMsg.innerText = '';
+}
 
-            errorMsg.innerText = '';
+/* Toggle login/signup */
+toggleLink.addEventListener('click', (e) => {
+  e.preventDefault();
+  setFormMode(!isLogin);
+});
 
-            try {
-                if (isLogin) {
-                    await signInWithEmailAndPassword(auth, email, password);
-                    alert('Logged in successfully!');
-                    window.location.href = 'dashboard.html';
-                } else {
-                    await createUserWithEmailAndPassword(auth, email, password);
-                    alert('Account created! You can now log in.');
-                    setFormMode(true);
-                    emailInput.value = '';
-                    passwordInput.value = '';
-                }
-            } catch (error) {
-                errorMsg.innerText = error.message;
-            }
-        });
-        await signInWithEmailAndPassword(auth, email, password);
+/* ========== SUBMIT BUTTON ========== */
+submitBtn.addEventListener('click', async () => {
+  const email = emailInput.value.trim();
+  const password = passwordInput.value.trim();
 
-// redirect
-window.location.href = "dashboard.html";
-    </script>
+  if (!email || !password) {
+    errorMsg.innerText = 'Please enter both email and password.';
+    return;
+  }
+
+  errorMsg.innerText = '';
+
+  try {
+    if (isLogin) {
+      // LOGIN
+      await signInWithEmailAndPassword(auth, email, password);
+
+      // redirect to dashboard
+      window.location.href = "dashboard.html";
+
+    } else {
+      // SIGNUP
+      await createUserWithEmailAndPassword(auth, email, password);
+
+      errorMsg.innerText = "Account created! Now login.";
+      setFormMode(true);
+
+      emailInput.value = '';
+      passwordInput.value = '';
+    }
+
+  } catch (error) {
+    errorMsg.innerText = error.message;
+  }
+});
+</script>
 </body>
 </html>
